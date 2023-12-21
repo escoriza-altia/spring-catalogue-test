@@ -1,0 +1,85 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Description" : "Template Creates new ECS service for docker images to run",
+    "Parameters": {
+      "containerName": {
+          "Type": "String",
+          "Description": "Implements the new spring task name",
+          "Default": "SpringContainer"
+      },
+      "imageRepository": {
+          "Type": "String",
+          "Description": "Definition of image link to ECR",
+          "Default": "173002037516.dkr.ecr.eu-west-1.amazonaws.com/impulse-spring-tests:latest"
+      },
+      "containerPortBinding": {
+          "Type": "Number",
+          "Description": "Port used to enable communication with container",
+          "Default": 8080
+      },
+      "clusterName": {
+        "Type": "String",
+        "Description": "Name of ECS-cluster",
+        "Default": "TestingSpringAQuarkus"
+      }
+    },
+    "Resources" : {
+      "Springtask": {
+        "Type" : "AWS::ECS::TaskDefinition",
+        "Properties" : {
+          "ContainerDefinitions" : [
+            {
+              "Cpu" : 1024,
+              "Essential" : true,
+              "Image" : {
+                "Ref": "imageRepository"
+              },
+              "Memory" : 2048,
+              "MemoryReservation" : 1024,
+              "Name" : {
+                "Ref": "containerName"
+              },
+              "PortMappings" : [
+                {
+                  "ContainerPort" : {
+                    "Ref": "containerPortBinding"
+                  },
+                  "Protocol" : "tcp"
+                }
+              ],
+              "logConfiguration": {
+                "LogDriver": "awslogs",
+                "options": {
+                  "awslogs-group" : "/ecs/fargate-task-definition",
+                  "awslogs-region": "eu-west-1",
+                  "awslogs-stream-prefix": "ecs"
+                }
+              }
+            }
+          ],
+          "Cpu" : "4096",
+          "Memory" : "8192",
+          "NetworkMode" : "awsvpc",
+          "ExecutionRoleArn": "arn:aws:iam::173002037516:role/ecsTaskExecutionRole",
+          "RuntimePlatform" : {
+            "CpuArchitecture" : "AMD64",
+            "OperatingSystemFamily": "LINUX"
+          },
+          "RequiresCompatibilities": [
+            "FARGATE"
+        ]
+        }
+      },
+      "ClusterFrameworkTasks": {
+        "Type" : "AWS::ECS::Cluster",
+        "Properties" : {
+          "ClusterName" : {
+            "Ref": "clusterName"
+          },
+          "CapacityProviders": [
+            "FARGATE"
+        ]
+        }
+      }
+  }
+}
