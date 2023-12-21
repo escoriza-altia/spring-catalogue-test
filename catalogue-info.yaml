@@ -1,0 +1,51 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: employees
+  description: General Employees Group
+spec:
+  type: team
+  profile:
+    displayName: General Employees Group
+    email: escoriza@gmail.com
+  children: []
+  members: [escoriza]
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: escoriza
+spec:
+  profile:
+    displayName: Jose Antonio Escoriza
+    email: escoriza@gmail.com
+    picture: https://0.gravatar.com/avatar/5dae9ba17d883766d850a0bf64d4beba3e1ae834309f2fde1c10a58a6c60f43f?size=512
+  memberOf: [employees]
+---  
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: escoriza
+spec:
+  profile:
+    displayName: Jose Antonio Escoriza
+    email: escoriza@gmail.com
+    picture: https://0.gravatar.com/avatar/5dae9ba17d883766d850a0bf64d4beba3e1ae834309f2fde1c10a58a6c60f43f?size=512
+  memberOf: [employees]
+---  
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: spring-catalogue-test
+  description: Example Catalog import.
+  # Example for optional annotations
+  annotations:
+    backstage.io/techdocs-ref: dir:./docs
+    backstage.io/source-location: url:https://https://github.com/escoriza-altia/spring-catalogue-test/tree/master/containerizeSpring/
+    github.com/project-slug: escoriza-altia/spring-catalogue-test
+    github.com/user-login: escoriza
+    vault.io/secrets-path: test/backstage
+spec:
+  type: service
+  owner: escoriza@gmail.com
+  lifecycle: experimental

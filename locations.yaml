@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: escoriza-examples
+  description: A collection of test location
+spec:
+  targets:
+    - ./catalogue-info.yaml
