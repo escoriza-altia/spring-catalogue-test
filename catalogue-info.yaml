@@ -10,17 +10,6 @@ spec:
     email: escoriza@gmail.com
   children: []
   members: [escoriza]
----
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: escoriza
-spec:
-  profile:
-    displayName: Jose Antonio Escoriza
-    email: escoriza@gmail.com
-    picture: https://0.gravatar.com/avatar/5dae9ba17d883766d850a0bf64d4beba3e1ae834309f2fde1c10a58a6c60f43f?size=512
-  memberOf: [employees]
 ---  
 apiVersion: backstage.io/v1alpha1
 kind: User
@@ -47,5 +36,5 @@ metadata:
     vault.io/secrets-path: test/backstage
 spec:
   type: service
-  owner: escoriza@gmail.com
+  owner: escoriza
   lifecycle: experimental
