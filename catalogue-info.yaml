@@ -26,7 +26,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: spring-catalogue-test
-  description: Example Catalog import.
+  description: OFufuuuffuuimport.
   # Example for optional annotations
   annotations:
     backstage.io/techdocs-ref: dir:./docs
