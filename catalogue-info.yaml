@@ -36,5 +36,5 @@ metadata:
     vault.io/secrets-path: test/backstage
 spec:
   type: service
-  owner: escoriza
+  owner: user/escoriza
   lifecycle: experimental
