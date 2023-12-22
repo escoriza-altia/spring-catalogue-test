@@ -74,6 +74,7 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+              - git.euipo.europa.eu
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
@@ -81,7 +82,7 @@ spec:
       name: Fetch Base
       action: fetch:template
       input:
-        url: ./template
+        url: https://github.com/ssf-dev/barebone
         values:
           name: ${{ parameters.name }}
 
@@ -96,7 +97,7 @@ spec:
       name: Publish
       action: publish:github
       input:
-        allowedHosts: ['github.com']
+        allowedHosts: ['github.com','git.euipo.europa.eu']
         description: This is ${{ parameters.name }}
         repoUrl: ${{ parameters.repoUrl }}
 
