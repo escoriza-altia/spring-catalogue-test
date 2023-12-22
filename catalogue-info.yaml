@@ -44,8 +44,8 @@ kind: Template
 # some metadata about the template itself
 metadata:
   name: v1beta3-demo
-  title: Test Action template
-  description: scaffolder v1beta3 template demo
+  title: This is a wonderful title
+  description: but the description is ever more awesome than the title, as you can see
 spec:
   owner: user:escoriza
   type: service
