@@ -113,4 +113,4 @@ spec:
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-        catalogInfoPath: './main/catalog/catalog-info.yaml'
+        catalogInfoPath: './master/catalog/catalog-info.yaml'
