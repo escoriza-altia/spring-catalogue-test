@@ -30,7 +30,7 @@ metadata:
   # Example for optional annotations
   annotations:
     backstage.io/techdocs-ref: dir:./docs
-    backstage.io/source-location: url:https://github.com/escoriza-altia/spring-catalogue-test/tree/master/containerizeSpring/
+    backstage.io/source-location: url:https://github.com/escoriza-altia/spring-catalogue-test/tree/master/
     github.com/project-slug: escoriza-altia/spring-catalogue-test
     github.com/user-login: escoriza
     vault.io/secrets-path: test/backstage
@@ -115,7 +115,7 @@ spec:
         values:
           name: ${{ parameters.name }}
           owner: ${{ parameters.owner }}
-          escoriza: Anotación de prueba fialing
+          description: ${{ parameters.description }} 
     - id: fetch-docs
       name: Fetch Docs
       action: fetch:plain
@@ -128,7 +128,7 @@ spec:
       action: publish:github
       input:
         allowedHosts: ['github.com','git.euipo.europa.eu']
-        description: This is ${{ parameters.description }}
+        description: ${{ parameters.description }}
         repoUrl: ${{ parameters.repoUrl }}
         # here's where the secret can be used
         # token: ${{ secrets.USER_OAUTH_TOKEN }}
