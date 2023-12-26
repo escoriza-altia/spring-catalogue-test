@@ -30,7 +30,7 @@ metadata:
   # Example for optional annotations
   annotations:
     backstage.io/techdocs-ref: dir:./docs
-    backstage.io/source-location: url:https://https://github.com/escoriza-altia/spring-catalogue-test/tree/master/containerizeSpring/
+    backstage.io/source-location: url:https://github.com/escoriza-altia/spring-catalogue-test/tree/master/containerizeSpring/
     github.com/project-slug: escoriza-altia/spring-catalogue-test
     github.com/user-login: escoriza
     vault.io/secrets-path: test/backstage
