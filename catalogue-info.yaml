@@ -115,6 +115,9 @@ spec:
           name: ${{ parameters.component_name }}
           owner: ${{ parameters.owner }}
           description: ${{ parameters.description }} 
+          repo_name: ${{ parameters.repoUrl.repoName}}
+          repo_organization: ${{ parameters.repoUrl.organization}}
+
     - id: fetch-docs
       name: Fetch Docs
       action: fetch:plain
