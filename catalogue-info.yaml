@@ -34,6 +34,7 @@ metadata:
     github.com/project-slug: escoriza-altia/spring-catalogue-test
     github.com/user-login: escoriza
     vault.io/secrets-path: test/backstage
+    escoriza.test/owner: ${{ values.owner}}
 spec:
   type: service
   owner: user:escoriza
@@ -51,6 +52,7 @@ spec:
   type: service
 
   # these are the steps which are rendered in the frontend with the form input
+  # Playground to test jsonschema ui https://rjsf-team.github.io/react-jsonschema-form/
   parameters:
     - title: Fill in some steps
       required:
@@ -63,6 +65,16 @@ spec:
           ui:autofocus: true
           ui:options:
             rows: 5
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          #https://backstage.io/docs/features/software-templates/ui-options-examples/#ownerpicker
+          ui:field: OwnerPicker
+          ui:options:
+            allowArbitraryValues: false
+            catalogFilter:
+              kind: [Group, User]
         description:
           title: Description
           type: string
@@ -79,9 +91,19 @@ spec:
           type: string
           ui:field: RepoUrlPicker
           ui:options:
+            #The allowedHosts part should be set to where you wish to enable this template to publish to. And it can be any host that is listed in your integrations config in app-config.yaml.
             allowedHosts:
               - github.com
-              - git.euipo.europa.eu
+              # - git.euipo.europa.eu
+            # Here's the option you can pass to the RepoUrlPicker
+            # https://backstage.io/docs/features/software-templates/writing-templates/#using-the-users-oauth-token
+            #requestUserCredentials:
+            #  secretsKey: USER_OAUTH_TOKEN
+            #  additionalScopes:
+            #    github:
+            #      - workflow
+            # Note, that you will need to configure an authentication provider, alongside the ScmAuthApi for your source code management (SCM) service to make this feature work.
+
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
@@ -92,7 +114,8 @@ spec:
         url: https://github.com/escoriza-altia/spring-boot-3-2-2-rest-kafka-mvn
         values:
           name: ${{ parameters.name }}
-
+          owner: ${{ parameters.owner }}
+          escoriza: Anotación de prueba fialing
     - id: fetch-docs
       name: Fetch Docs
       action: fetch:plain
@@ -107,10 +130,19 @@ spec:
         allowedHosts: ['github.com','git.euipo.europa.eu']
         description: This is ${{ parameters.description }}
         repoUrl: ${{ parameters.repoUrl }}
-
+        # here's where the secret can be used
+        # token: ${{ secrets.USER_OAUTH_TOKEN }}
     - id: register
       name: Register
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
         catalogInfoPath: './master/catalog/catalog-info.yaml'
+
+output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
