@@ -55,9 +55,9 @@ spec:
   parameters:
     - title: Fill in some steps
       required:
-        - name
+        - component_name
       properties:
-        name:
+        component_name:
           title: Name
           type: string
           description: Unique name of the component
@@ -112,7 +112,7 @@ spec:
       input:
         url: https://github.com/escoriza-altia/spring-boot-3-2-2-rest-kafka-mvn
         values:
-          name: ${{ parameters.name }}
+          name: ${{ parameters.component_name }}
           owner: ${{ parameters.owner }}
           description: ${{ parameters.description }} 
     - id: fetch-docs
