@@ -34,7 +34,6 @@ metadata:
     github.com/project-slug: escoriza-altia/spring-catalogue-test
     github.com/user-login: escoriza
     vault.io/secrets-path: test/backstage
-    escoriza.test/owner: ${{ values.owner }}
 spec:
   type: service
   owner: user:escoriza
